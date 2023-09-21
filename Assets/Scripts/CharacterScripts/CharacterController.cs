@@ -1,24 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class CharacterController : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
-    public float speed;
+    private float speed;
     [SerializeField] private Animator anim;
+    public int ID;
+    public Vector3 startPose;
+    [SerializeField] private RawImage icon;
     private void Awake()
     {
-        float animSpeed = Mathf.Clamp(speed/200f, 0f, 1f);
+        startPose = transform.position;    
+    }
+
+    public void SetSpeedToCharacter()
+    {
+        speed = Random.Range(100, 200);
+        float animSpeed = Mathf.Clamp(speed / 200f, 0f, 1f);
         anim.SetFloat("runningSpeed", animSpeed);
     }
-    private void FixedUpdate()
+
+    public void ShowIconInWinnerView()
     {
-        MoveCharacter();
+        GameManagerr.Instance.restartPage.winnerImage.texture = icon.texture;
     }
-    public void MoveCharacter()
+
+    public void StartRunning()
     {
-       // rb.velocity=transform.forward * speed * Time.deltaTime;
+        anim.SetTrigger("run");
+        anim.SetBool("runing", true);
+    }
+    public void StopRunning()
+    {
+        anim.SetBool("runing", false);
+        anim.SetTrigger("stopRun");
+    }
+
+    public void MoveCharacterToStartPose()
+    {
+        transform.position = startPose;
     }
     public void Jump(float speed)
     {
@@ -26,8 +48,8 @@ public class CharacterController : MonoBehaviour
         anim.SetTrigger("jump");
        
     }
-    public void OnEnable()
+    public void ChangeAnimatorStatus(bool status)
     {
-        enabled = true;
+        anim.enabled = status;
     }
 }
