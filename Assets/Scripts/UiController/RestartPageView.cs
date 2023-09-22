@@ -2,24 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class RestartPageView : MonoBehaviour
+namespace Runner.UIcontroller
 {
-    [SerializeField] private Text gamesCount;
-    [SerializeField] private Text rightPredictionsCount;
-    [SerializeField] private Text resultTxt;
-    [SerializeField] private GameObject restartPage;
-    public RawImage winnerImage;
-    public void ShowRestartPage(bool forWinner)
+    public class RestartPageView : MonoBehaviour
     {
-        gamesCount.text = PlayerPrefs.GetInt("gamesCount").ToString();
-        rightPredictionsCount.text = PlayerPrefs.GetInt("rightPredictionsCount").ToString();
-        if (forWinner)
+        [SerializeField] private Text gamesCount;
+        [SerializeField] private Text rightPredictionsCount;
+        [SerializeField] private Text resultTxt;
+        [SerializeField] private GameObject restartPage;
+        public RawImage winnerImage;
+        public void ShowRestartPage(bool forWinner)
         {
-            resultTxt.text = "You Win!!!";
-        }
-        else
-            resultTxt.text = "You Lose";
+            gamesCount.text = PlayerPrefs.GetInt("gamesCount").ToString();
+            rightPredictionsCount.text = PlayerPrefs.GetInt("rightPredictionsCount").ToString();
+            if (forWinner)
+            {
+                resultTxt.text = "You Win!!!";
+            }
+            else
+                resultTxt.text = "You Lose";
 
-        restartPage.SetActive(true);
+            restartPage.SetActive(true);
+        }
     }
 }

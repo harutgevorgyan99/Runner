@@ -1,41 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Runner.AnimatorrController;
+using Runner.CharacterController;
+using Runner.obstaclesController;
+using Runner.PlayerControllers;
+using Runner.UIcontroller;
 
-public class GameManagerr : MonoBehaviour
+namespace Runner.GameController
 {
-    private static GameManagerr instance;
-    public static GameManagerr Instance
+    public class GameManagerr : MonoBehaviour
     {
-        get
+        private static GameManagerr instance;
+        public static GameManagerr Instance
         {
+            get
+            {
 
+                if (instance == null)
+                {
+                    instance = new GameManagerr();
+                }
+
+                return instance;
+            }
+        }
+
+        public int playerPredictedCharacterID;
+        public CharactersManager charactersManager;
+        public GameActionController gameActionController;
+        public RestartPageView restartPage;
+        public PlayerController playerController;
+        public ObstaclesManager obstaclesManager;
+        public AnimatorController animatorController;
+        private void Awake()
+        {
             if (instance == null)
             {
-                instance = new GameManagerr();
+                instance = this;
+                DontDestroyOnLoad(gameObject);
             }
 
-            return instance;
         }
-    }
-
-    public int playerPredictedCharacterID;
-    public CharactersManager charactersManager;
-    public GameActionController gameActionController;
-    public RestartPageView restartPage;
-    public PlayerController playerController;
-    public ObstaclesManager obstaclesManager;
-    private void Awake()
-    {
-        if (instance == null)
+        private void Start()
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            charactersManager.SetCharactersSpeeed();
         }
-        
-    }
-    private void Start()
-    {
-        charactersManager.SetCharactersSpeeed();
     }
 }
