@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-namespace Runner.PlayerControllers
+using Runner.Game;
+namespace Runner.Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerStatistics : MonoBehaviour
     {
         private int gamesCount = 0;
         private int rightPredictionCount = 0;
@@ -21,7 +21,10 @@ namespace Runner.PlayerControllers
             else
                 PlayerPrefs.SetInt("rightPredictionsCount", 0);
         }
-
+        private void Start()
+        {
+         // GameEventsManager.Instance.EndGame.AddListener(()=>SetResults(GameEventsManager.Instance.gameStartActions.isWiner));  
+        }
         public void SetResults(bool isWin)
         {
             gamesCount++;

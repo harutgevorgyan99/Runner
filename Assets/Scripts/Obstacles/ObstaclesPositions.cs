@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Runner.obstaclesController
+using Runner.Game;
+namespace Runner.Obstacles
 {
-    public class ObstaclesManager : MonoBehaviour
+    public class ObstaclesPositions : MonoBehaviour
     {
         private List<Vector3> obstaclesPositions = new List<Vector3>();
         [SerializeField] private List<GameObject> obstacles = new List<GameObject>();
@@ -15,6 +16,11 @@ namespace Runner.obstaclesController
                 obstaclesPositions.Add(obstacles[i].transform.position);
             }
         }
+        private void Start()
+        {
+            GameEventsManager.Instance.RestartGame.AddListener(() => SetObstaclesInRandomPositions());
+        }
+
         public void SetObstaclesInRandomPositions()
         {
             ShuffleArray(obstaclesPositions);

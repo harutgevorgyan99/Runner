@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Runner.obstaclesController
+namespace Runner.Obstacles
 {
-    public class ObstaclesData : MonoBehaviour
+    public class JumpPositionData : MonoBehaviour
     {
         [SerializeField] Transform normalJumpingPosition;
         public float normalJumpingDistance;
